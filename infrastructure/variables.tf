@@ -21,3 +21,25 @@ variable "environment" {
   description = "Environment name"
   default     = "production"
 }
+
+variable "dns_zone_name" {
+  type        = string
+  description = "Domain name for the DNS zone"
+  default     = "nedbread.com"
+}
+
+variable "repository_branch" {
+  type        = string
+  description = "Branch of the repository to deploy"
+  default     = "main"
+}
+
+variable "repository_token" {
+  type        = string
+  description = "Personal access token for the repository"
+}
+
+variable "repository_url" {
+  type        = string
+  description = "URL of the repository"
+}
