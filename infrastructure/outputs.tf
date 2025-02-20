@@ -12,9 +12,3 @@ output "nameservers" {
   value       = azurerm_dns_zone.main.name_servers
   description = "The nameservers for the DNS zone"
 }
-
-output "custom_domain_validation_token" {
-  value       = azurerm_static_web_app.web.custom_domain[0].validation_token
-  description = "The validation token for the custom domain"
-  sensitive   = true
-}

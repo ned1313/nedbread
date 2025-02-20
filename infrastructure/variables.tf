@@ -7,7 +7,7 @@ variable "resource_group_name" {
 variable "location" {
   type        = string
   description = "Azure region to deploy resources"
-  default     = "eastus"
+  default     = "westus2"
 }
 
 variable "static_site_name" {
@@ -28,18 +28,8 @@ variable "dns_zone_name" {
   default     = "nedbread.com"
 }
 
-variable "repository_branch" {
+variable "azure_subscription_id" {
   type        = string
-  description = "Branch of the repository to deploy"
-  default     = "main"
-}
-
-variable "repository_token" {
-  type        = string
-  description = "Personal access token for the repository"
-}
-
-variable "repository_url" {
-  type        = string
-  description = "URL of the repository"
+  description = "Azure subscription ID"
+  
 }

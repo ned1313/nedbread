@@ -9,11 +9,17 @@ terraform {
 
 provider "azurerm" {
   features {}
+  subscription_id = var.azure_subscription_id
 }
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
+}
+
+import {
+  id = "/subscriptions/4d8e572a-3214-40e9-a26f-8f71ecd24e0d/resourceGroups/rg-nedbread/providers/Microsoft.Web/staticSites/nedbread"
+  to = azurerm_static_web_app.web
 }
 
 resource "azurerm_static_web_app" "web" {
@@ -39,7 +45,7 @@ resource "azurerm_dns_zone" "main" {
   }
 }
 
-resource "azurerm_dns_txt_record" "example" {
+resource "azurerm_dns_txt_record" "main" {
   name                = "_dnsauth.www"
   zone_name           = var.dns_zone_name
   resource_group_name = azurerm_resource_group.rg.name
@@ -51,6 +57,6 @@ resource "azurerm_dns_txt_record" "example" {
 
 resource "azurerm_static_web_app_custom_domain" "main" {
   static_web_app_id = azurerm_static_web_app.web.id
-  domain_name       = "www.${azurerm_dns_txt_record.main.zone_name}"
+  domain_name       = "www.${var.dns_zone_name}"
   validation_type   = "dns-txt-token"
 }
